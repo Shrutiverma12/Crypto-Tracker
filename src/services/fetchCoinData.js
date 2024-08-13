@@ -6,8 +6,7 @@ export async function fetchCoinData(page = 1, currency = "usd") {
     const response = await axiosInstance.get(
       `coins/markets?vs_currency=${currency}&per_page=${perPage}&page=${page}&order=market_cap_desc`
     );
-    console.log(response);
-    return response;
+    return response.data;
   } catch (error) {
     console.error(error);
     return null;
