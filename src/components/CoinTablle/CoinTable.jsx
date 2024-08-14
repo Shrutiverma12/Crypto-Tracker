@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useQuery } from "react-query";
-
+import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchCoinData } from "../../services/fetchCoinData";
+import axios from "axios";
+import { CurrencyContext } from "../../context/CurrencyContext";
 
-function CoinTable({ currency }) {
+function CoinTable() {
+  const { currency } = useContext(CurrencyContext);
   const [page, setPage] = useState(1);
-  const { data, isLoading, isError, error } = useQuery(
+  // const [coins, setCoins] = useState([]);
+  const { data, isLoading, isError, error, refetch } = useQuery(
     ["coins", page, currency],
     () => fetchCoinData(page, currency),
     {
@@ -13,6 +17,8 @@ function CoinTable({ currency }) {
       // retryDelay: 1000,
       cacheTime: 1000 * 60 * 2,
       staleTime: 1000 * 60 * 2,
+      // keepPreviousData: true,
+      // enabled: false,
     }
   );
 
