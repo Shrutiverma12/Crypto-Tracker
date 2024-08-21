@@ -1,33 +1,35 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useQuery } from "react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { fetchCoinData } from "../../services/fetchCoinData";
 import axios from "axios";
 import { CurrencyContext } from "../../context/CurrencyContext";
 import currencyStore from "../../state/store";
+import { useNavigate } from "react-router-dom";
 
 function CoinTable() {
   // const { currency } = useContext(CurrencyContext);
   const { currency } = currencyStore();
   const [page, setPage] = useState(1);
-  // const [coins, setCoins] = useState([]);
-  const { data, isLoading, isError, error, refetch } = useQuery(
+
+  const natigate = useNavigate();
+
+  const { data, isLoading, isError, error } = useQuery(
     ["coins", page, currency],
     () => fetchCoinData(page, currency),
     {
-      // retry: 2,
-      // retryDelay: 1000,
       cacheTime: 1000 * 60 * 2,
       staleTime: 1000 * 60 * 2,
-      // keepPreviousData: true,
-      // enabled: false,
     }
   );
 
-  if (isError) {
-    return <div>Error: {error.message}</div>;
+  function handleCoinRedirect(id) {
+    natigate(`/details/${id}`);
   }
 
+  if (isError) {
+    return <div>Error:{error.message}</div>;
+  }
   return (
     <>
       <div className="my-5 flex flex-col items-center justify-center gap-5 w-[80vw] mx-auto">
@@ -39,12 +41,13 @@ function CoinTable() {
           <div className="basis-[20%]">Market Cap</div>
         </div>
 
-        <div className="flex flex-col w-[80vw] mx-auto">
+        <div className="flex flex-col w-[80vw] mx-auto cursor-pointer">
           {isLoading && <div>Loading...</div>}
           {data &&
             data.map((coin) => {
               return (
                 <div
+                  onClick={() => handleCoinRedirect(coin.id)}
                   key={coin.id}
                   className="w-full bg-transparent text-white flex py-4 px-2 font-semibold items-center justify-between"
                 >
