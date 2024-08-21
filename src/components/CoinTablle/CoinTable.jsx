@@ -6,6 +6,7 @@ import axios from "axios";
 import { CurrencyContext } from "../../context/CurrencyContext";
 import currencyStore from "../../state/store";
 import { useNavigate } from "react-router-dom";
+import PageLoader from "../PageLoader/PageLoader";
 
 function CoinTable() {
   // const { currency } = useContext(CurrencyContext);
@@ -29,6 +30,9 @@ function CoinTable() {
 
   if (isError) {
     return <div>Error:{error.message}</div>;
+  }
+  if (isLoading) {
+    return <PageLoader />;
   }
   return (
     <>
