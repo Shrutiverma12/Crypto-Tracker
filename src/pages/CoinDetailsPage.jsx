@@ -4,6 +4,7 @@ import { fetchCoinDetails } from "../services/fetchCoinDetails";
 import parse from "html-react-parser";
 import store from "../state/store";
 import PageLoader from "../components/PageLoader/PageLoader";
+import CoinInfoContainer from "../components/CoinInfo/CoinInfoContainer";
 
 function CoinDetailsPage() {
   const { coinId } = useParams();
@@ -47,7 +48,9 @@ function CoinDetailsPage() {
           </div>
         </div>
       </div>
-      <div className="md:w-2/3 w-full">Coin Information</div>
+      <div className="md:w-2/3 w-full">
+        <CoinInfoContainer coinId={coinId} />
+      </div>
     </div>
   );
 }
