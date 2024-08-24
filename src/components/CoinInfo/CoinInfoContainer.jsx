@@ -1,28 +1,18 @@
 import CoinInfo from "./CoinInfo";
-import { useQuery } from "react-query";
-import currencyStore from "../../state/store";
-import { useState } from "react";
 import PageLoader from "../PageLoader/PageLoader";
-import { fetchCoinHistoricData } from "../../services/fetchCoinHistoricData";
 import Alert from "../Alert/Alert";
+import { useFetchCoinHistory } from "../../hooks/useFetchCoinHistory";
 
 function CoinInfoContainer({ coinId }) {
-  const { currency } = currencyStore();
-  const [days, setDays] = useState(7);
-  const [interval, setCoinInterval] = useState("daily");
-
   const {
-    data: historicData,
+    historicData,
     isLoading,
     isError,
-  } = useQuery(
-    ["coinHistoricData", coinId, currency, days, interval],
-    () => fetchCoinHistoricData(coinId, interval, days, currency),
-    {
-      cacheTime: 1000 * 60 * 2,
-      staleTime: 1000 * 60 * 2,
-    }
-  );
+    setDays,
+    setCoinInterval,
+    days,
+    currency,
+  } = useFetchCoinHistory(coinId);
 
   if (isLoading) {
     return <PageLoader />;
