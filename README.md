@@ -1,8 +1,14 @@
-# React + Vite
+## Crypto currency price tracking App Using React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Diployed URL]()
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Reusable components made using presenter container pattern
+- Custom hook implemented
+- State management done by Zustand
+- Consuming CoinGecko Free API
+- API request are catched using React query
+- Suspense and error boundaries implements
+- Impliment Chart of Historic data using react chartjs-2 library where you can see chart 
+  of(24 hours, 7 days ,90 days, 365 days) as per choosen
+![image](https://github.com/user-attachments/assets/be187f71-8771-4c99-b5ee-db8dac1c354e)
+![image](https://github.com/user-attachments/assets/21623448-2a88-4029-af52-d00dd0efba54)
