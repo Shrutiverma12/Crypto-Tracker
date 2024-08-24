@@ -13,11 +13,11 @@ function CoinInfo({ historicData, setDays, setCoinInterval, days, currency }) {
     console.log(e.target.options[e.target.selectedIndex].value);
     const daySelected = e.target.options[e.target.selectedIndex].value;
     if (daySelected == 1) {
-      setCoinInterval("");
+      setCoinInterval?.("");
     } else {
-      setCoinInterval("daily");
+      setCoinInterval?.("daily");
     }
-    setDays(e.target.options[e.target.selectedIndex].value);
+    setDays?.(e.target.options[e.target.selectedIndex].value);
   }
 
   return (
@@ -38,7 +38,7 @@ function CoinInfo({ historicData, setDays, setCoinInterval, days, currency }) {
                 {
                   label: `Price(Past ${days} ${
                     days == 1 ? "Day" : "Days"
-                  } in ${currency.toUpperCase()}`,
+                  } in ${currency?.toUpperCase()}`,
                   data: historicData.prices.map((coinPrice) => coinPrice[1]),
                 },
               ],

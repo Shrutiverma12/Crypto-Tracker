@@ -1,7 +1,7 @@
 import CoinInfo from "./CoinInfo";
 import PageLoader from "../PageLoader/PageLoader";
 import Alert from "../Alert/Alert";
-import { useFetchCoinHistory } from "../../hooks/useFetchCoinHistory";
+import useFetchCoinHistory from "../../hooks/useFetchCoinHistory";
 
 function CoinInfoContainer({ coinId }) {
   const {
